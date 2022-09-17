@@ -14,7 +14,7 @@ const validFieldsSignup = Joi.object({
 
 const validFieldsSignin = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(8).required(),
 }).required().messages({
   'any.required': '{#label} is required',
   'string.empty': '{#label} field is not allowed to be empty',
