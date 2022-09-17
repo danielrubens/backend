@@ -5,7 +5,6 @@ module.exports = (err, _req, res, _next) => {
   }
   console.log(err);
   const { statusCode, message, stack } = err;
-  console.log('Type', message);
   console.log(stack);
   res.status(statusCode).json({ message });
 };
