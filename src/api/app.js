@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const { errorHandler } = require('../middlewares/errorHandle');
+const errorHandle = require('../middlewares/errorHandle');
 
 const routes = require('../routes');
 
@@ -15,6 +15,6 @@ app.all('*', (_req, res) => {
   res.status(404).send('Not Found');
 });
 
-app.use(errorHandler);
+app.use(errorHandle);
 
 module.exports = app;
