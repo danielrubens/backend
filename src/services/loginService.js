@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-identical-functions */
+const { loginModel } = require('../models');
 const signIn = async (_dataForCreate) => {
   const err = new Error('Not implemented');
   err.statusCode = 401;
