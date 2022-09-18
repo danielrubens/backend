@@ -8,8 +8,9 @@
     "dev": "nodemon .",
     "start": "node .",
     "lint": "eslint ./src/**/*.js",
-    "lint-fix": "eslint ./src/**/*.js --fix"
-  },
+    "lint-fix": "eslint ./src/**/*.js --fix",
+    "seed": "node seed/index.js"
+  },    
   "repository": {
     "type": "git",
     "url": "git+https://github.com/danielrubens/backend.git"
