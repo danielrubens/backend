@@ -7,7 +7,7 @@ const sigIn = async (email) => {
   return result;
 }
 
-const sigUp = async (id, name, email, password) => {
+const signup = async ({id, name, email, password}) => {
   const query = 'INSERT INTO weather.user (id, name, email, password) VALUES (?, ?, ?, ?)';
   const connection = await getConnection();
   const [result] = await connection.execute(query, [id, name, email, password]);
@@ -18,5 +18,5 @@ const sigUp = async (id, name, email, password) => {
 
 module.exports = {
   sigIn,
-  sigUp,
+  signup,
 };

@@ -1,8 +1,14 @@
 const { loginModel } = require('../Models');
 const { userModel } = require('../Models');
-const { handlePassword, createId, token } = require('../utils');
+const {
+   handlePassword, 
+   createId, 
+   token,
+   ErrorClient,
+   ServerError,
+   SuccessfulResponses,
+   } = require('../utils');
 
-userModel.getUserByEmail('marcio.daniel@msn.com').then((user) => console.log(user, 'data'));
 
 const signIn = async ({email, password}) => {
   const user = await userModel.getUserByEmail(email);
@@ -21,20 +27,27 @@ const signIn = async ({email, password}) => {
 
 };
 
-const signUp = async ({name, email, password}) => {
+const signup = async ({name, email, password}) => {
   const user = await userModel.getUserByEmail(email);
-  if ( user) {
-    const err = new Error('User already exists');
-    err.statusCode = 409;
-    throw err;
+  const err = new ErrorClient;
+  const success = new SuccessfulResponses;
+
+  if (user !== null) {
+    throw err.conflict('User already registered');
   }
   const hash = await handlePassword.createHashPassword(password);
+
   const id = createId();
-  await loginModel.createUser({id, name, email, password: hash});
-  return newUser;
+
+  await loginModel.signup({id, name, email, password: hash});
+
+  return success.created({
+    id,
+    token: token.generate({id, name}),
+  });
 };
 
 module.exports = {
   signIn,
-  signUp,
+  signup,
 };

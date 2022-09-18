@@ -5,6 +5,6 @@ const { validSignin, validSignup } = require('../middlewares/validation');
 const loginRoute = Router();
 
 loginRoute.post('/', validSignin, loginController.signIn);
-loginRoute.put('/', validSignup, loginController.sigUp);
+loginRoute.put('/', validSignup, loginController.signup);
 
 module.exports = loginRoute;
