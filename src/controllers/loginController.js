@@ -3,8 +3,8 @@ const { loginService } = require('../services');
 
 const signIn = async (req, res) => { 
   const { email, password } = req.body;
-  const token = await loginService.signIn({email, password});
-  res.status(200).json({ token });
+  const { statusCode, payload }  = await loginService.signIn({email, password});
+  res.status(statusCode).json({ payload });
 };
 
 const signup = async (req, res) => {

@@ -13,8 +13,10 @@ app.use(express.json());
 
 app.use('/login', routes.loginRoute);
 
-app.all('*', (_req, res) => {
-  res.status(404).send('Not Found');
+app.all('*', (_req, _res) => {
+  const { ErrorClient } = require('../utils');
+  const errorClient = new ErrorClient;
+  throw errorClient.notFound('Endpoint not found');
 });
 
 app.use(errorHandle);

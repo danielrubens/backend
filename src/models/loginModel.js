@@ -8,12 +8,17 @@ const sigIn = async (email) => {
 }
 
 const signup = async ({id, name, email, password}) => {
-  const query = 'INSERT INTO weather.user (id, name, email, password) VALUES (?, ?, ?, ?)';
-  const connection = await getConnection();
-  const [result] = await connection.execute(query, [id, name, email, password]);
-  return {
-    id: result.insertId,
-  }
+    const connection = await getConnection();
+    const query = 'INSERT INTO weather.user (id, name, email, password) VALUES (?, ?, ?, ?)';
+    const [result] = await connection.execute(query, [id, name, email, password]);
+    if (result.affectedRows === 1) {
+      return {
+        id,
+        name,
+        email,
+      };
+    }
+    return null;
 }
 
 module.exports = {

@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { token, ErrorClient } = require('../utils');
 
 const validFieldsSignup = Joi.object({
   name: Joi.string().min(2).max(50).required(),
@@ -41,7 +42,25 @@ const validSignin = (req, res, next) => {
   next();
 };
 
+const validToken = (req, _res, next) => {
+  const { authorization } = req.headers;
+
+  const errorClient = new ErrorClient;
+
+  if (authorization === undefined) {
+    throw errorClient('Token not found', 401);
+  }
+  const check = token.authenticate(authorization);
+  if (check.validated === false ) {
+    throw errorClient.unauthorized('Expired or invalid token');
+  }
+  req.user = { id: check.payload.id, name: check.payload.name };
+
+  next();
+};
+
 module.exports = {
   validSignup,
   validSignin,
+  validToken,
 };

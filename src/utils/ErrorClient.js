@@ -1,4 +1,4 @@
-module.exports = class ClientError extends Error {
+module.exports = class ErrorClient extends Error {
   badRequest = (message = 'Bad Request') => ({
     statusCode: 404,
     message,

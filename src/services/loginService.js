@@ -1,50 +1,57 @@
 const { loginModel } = require('../Models');
 const { userModel } = require('../Models');
+
 const {
-   handlePassword, 
-   createId, 
-   token,
-   ErrorClient,
-   ServerError,
-   SuccessfulResponses,
-   } = require('../utils');
+  handlePassword,
+  createId,
+  token,
+  ErrorClient,
+  SuccessfulResponses,
+} = require('../utils');
 
+const erroClient = new ErrorClient;
+const success = new SuccessfulResponses;
 
-const signIn = async ({email, password}) => {
+const signIn = async ({ email, password }) => {
   const user = await userModel.getUserByEmail(email);
-  if ( user === null) {
-    const err = new Error('User not found');
-    err.statusCode = 401;
-    throw err;
+  if (user === null) {
+    throw erroClient.unauthorized('Email or password incorrect');
   }
-  const isValid = await handlePassword.comparePassword(password, user.password);
-  if (!isValid) {
-    const err = new Error('Invalid password');
-    err.statusCode = 401;
-    throw err;
+  const check = await handlePassword.comparePassword({ password, hash: user.password });
+
+  if (check.validated === false) {
+    throw erroClient.unauthorized('Email or password incorrect');
   }
-  return user;
+
+  const { id, name } = user;
+
+  return success.ok({
+    id,
+    token: token.generate({ id, name }),
+  });
 
 };
 
-const signup = async ({name, email, password}) => {
+const signup = async ({ name, email, password }) => {
   const user = await userModel.getUserByEmail(email);
-  const err = new ErrorClient;
-  const success = new SuccessfulResponses;
 
   if (user !== null) {
-    throw err.conflict('User already registered');
+    throw erroClient.conflict('User already registered');
   }
   const hash = await handlePassword.createHashPassword(password);
 
   const id = createId();
 
-  await loginModel.signup({id, name, email, password: hash});
+  const result = await loginModel.signup({ id, name, email, password: hash });
+  if (result === null) {
+    throw err.internal('Error creating user');
+  }
 
   return success.created({
     id,
-    token: token.generate({id, name}),
+    token: token.generate({ id, name }),
   });
+
 };
 
 module.exports = {

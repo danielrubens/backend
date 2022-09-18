@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS weather.user (
 `;
 
 const GET_USER = `
-SELECT * FROM weather.user WHERE id = '20db4ab0-c100-4af8-afcd-3108b398431f'
+SELECT * FROM weather.user WHERE id = '7a67f801-0af4-4632-b642-f5e0e44d8dba'
 `;
 
 const SEED_DATA = `
@@ -34,10 +34,10 @@ INSERT INTO
   weather.user(id, name, email, password)
 VALUES
   (
-    '20db4ab0-c100-4af8-afcd-3108b398431f',
+    '7a67f801-0af4-4632-b642-f5e0e44d8dba',
     'Márcio Daniel',
     'marcio.daniel@betrybe.com',
-    'U2FsdGVkX1+hdnlO2gVlCXzhptUKmLSjN017jtM5PLs='
+    '$2b$10$AwdqKMYBWNR20dMQD4gqN.8/3qVkNQczunybgykv/svvrUOGuxoIa'
   )
 `
 
