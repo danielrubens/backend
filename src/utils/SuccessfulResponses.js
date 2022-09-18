@@ -1,4 +1,4 @@
-class successfulResponses {
+module.exports = class SuccessfulResponses {
   constructor() {
     this.successfulResponses = {
       "ok": 200,
@@ -13,47 +13,47 @@ class successfulResponses {
     }
   }
   ok = (payload = null) => ({
-    status: this.successfulResponses.ok,
+    statusCode: this.successfulResponses.ok,
     payload
   })
 
   created = (payload = null) => ({
-    status: this.successfulResponses.created,
+    statusCode: this.successfulResponses.created,
     payload
   })
 
   accepted = (payload = null) => ({
-    status: this.successfulResponses.accepted,
+    statusCode: this.successfulResponses.accepted,
     payload
   })
 
   noContent = (payload = null) => ({
-    status: this.successfulResponses.noContent,
+    statusCode: this.successfulResponses.noContent,
     payload
   })
 
   resetContent = (payload = null) => ({
-    status: this.successfulResponses.resetContent,
+    statusCode: this.successfulResponses.resetContent,
     payload
   })
 
   partialContent = (payload = null) => ({
-    status: this.successfulResponses.partialContent,
+    statusCode: this.successfulResponses.partialContent,
     payload
   })
 
   multiStatus = (payload = null) => ({
-    status: this.successfulResponses.multiStatus,
+    statusCode: this.successfulResponses.multiStatus,
     payload
   })
 
   alreadyReported = (payload = null) => ({
-    status: this.successfulResponses.alreadyReported,
+    statusCode: this.successfulResponses.alreadyReported,
     payload
   })
 
   imUsed = (payload = null) => ({
-    status: this.successfulResponses.imUsed,
+    statusCode: this.successfulResponses.imUsed,
     payload
   })
 }

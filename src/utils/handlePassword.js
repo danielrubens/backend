@@ -2,7 +2,9 @@ const bcrypt = require('bcrypt');
 
 const comparePassword = async (password, hash) => {
   const isValid = await bcrypt.compare(password, hash);
-  return isValid;
+  return {
+    validated: isValid,
+  }
 }
 
 const createHashPassword = async (password) => {
