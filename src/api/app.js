@@ -4,7 +4,6 @@ const { ErrorClient } = require('../utils');
 
 require('dotenv').config();
 
-console.log('Environment:', process.env);
 const errorHandle = require('../middlewares/errorHandle');
 
 const routes = require('../routes');
