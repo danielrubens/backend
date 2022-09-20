@@ -1,15 +1,17 @@
+/* eslint-disable max-lines-per-function */
 const mysql = require('mysql2/promise');
 require('dotenv').config();
+
+console.log(process.env);
 
 const getConnection = async () => {
   const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    password: process.env.DB_PASSWORD,
   };
   return mysql.createPool(dbConfig);
 };
-
 
 const DB_CREATE = `
 CREATE DATABASE IF NOT EXISTS weather;
@@ -39,16 +41,17 @@ VALUES
     'marcio.daniel@betrybe.com',
     '$2b$10$AwdqKMYBWNR20dMQD4gqN.8/3qVkNQczunybgykv/svvrUOGuxoIa'
   )
-`
+`;
 
 const executeQueries = async () => {
   const connection = await getConnection();
   await connection.execute(DB_CREATE);
-  try{
+  try {
     const [result] = await connection.execute(GET_USER);
     if (result[0] === undefined) {
       await connection.execute(CREATE_TABLE);
       await connection.execute(SEED_DATA);
+      // eslint-disable-next-line sonarjs/no-duplicate-string
       console.log('**********************');
       console.log('---Database created---');
       console.log('**********************');
@@ -65,5 +68,5 @@ const executeQueries = async () => {
   }
   connection.end();
   process.exit(0);
-}
+};
 executeQueries();

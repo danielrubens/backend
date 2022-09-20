@@ -1,32 +1,30 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-console.log(process.env.JWT_SECRET);
-
-const generate = ({id, name}) => {
+const generate = ({ id, name }) => {
   const options = {
     expiresIn: '14d',
     algorithm: 'HS256',
-  }
-  const token = jwt.sign({id, name}, process.env.JWT_SECRET, options);
+  };
+  const token = jwt.sign({ id, name }, process.env.JWT_SECRET, options);
 
   return token;
 };
 
 const authenticate = (token) => {
-  try{
+  try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return {
       payload: decoded,
       validated: true,
-    }
+    };
   } catch (error) {
     return {
       payload: null,
       validated: false,
-    }
+    };
   }
-}
+};
 
 module.exports = {
   generate,

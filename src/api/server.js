@@ -1,6 +1,8 @@
 const app = require('./app');
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT_BACK || 4000;
+
+console.log(process.env);
 
 app.listen(PORT, () => {
   console.log(`

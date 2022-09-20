@@ -1,59 +1,70 @@
 module.exports = class SuccessfulResponses {
   constructor() {
     this.successfulResponses = {
-      "ok": 200,
-      "created": 201,
-      "accepted": 202,
-      "noContent": 204,
-      "resetContent": 205,
-      "partialContent": 206,
-      "multiStatus": 207,
-      "alreadyReported": 208,
-      "imUsed": 226,
-    }
+      ok: 200,
+      created: 201,
+      accepted: 202,
+      noContent: 204,
+      resetContent: 205,
+      partialContent: 206,
+      multiStatus: 207,
+      alreadyReported: 208,
+      imUsed: 226,
+    };
   }
-  ok = (payload = null) => ({
-    statusCode: this.successfulResponses.ok,
-    payload
-  })
 
-  created = (payload = null) => ({
-    statusCode: this.successfulResponses.created,
-    payload
-  })
+  ok(payload = null) {
+    return {
+      statusCode: this.successfulResponses.ok,
+      payload,
+    };
+  }
 
-  accepted = (payload = null) => ({
-    statusCode: this.successfulResponses.accepted,
-    payload
-  })
+  created(payload = null) {
+    return {
+      statusCode: this.successfulResponses.created,
+      payload,
+    };
+  }
 
-  noContent = (payload = null) => ({
-    statusCode: this.successfulResponses.noContent,
-    payload
-  })
+  accepted(payload = null) {
+    return {
+      statusCode: this.successfulResponses.accepted,
+      payload,
+    };
+  }
 
-  resetContent = (payload = null) => ({
-    statusCode: this.successfulResponses.resetContent,
-    payload
-  })
+  noContent(payload = null) {
+    return {
+      statusCode: this.successfulResponses.noContent,
+      payload,
+    };
+  }
 
-  partialContent = (payload = null) => ({
-    statusCode: this.successfulResponses.partialContent,
-    payload
-  })
+  resetContent(payload = null) {
+    return {
+      statusCode: this.successfulResponses.resetContent,
+      payload,
+    };
+  }
 
-  multiStatus = (payload = null) => ({
-    statusCode: this.successfulResponses.multiStatus,
-    payload
-  })
+  partialContent(payload = null) {
+    return { statusCode: this.successfulResponses.partialContent,
+    payload };
+  } 
 
-  alreadyReported = (payload = null) => ({
-    statusCode: this.successfulResponses.alreadyReported,
-    payload
-  })
+  multiStatus(payload = null) {
+    return { tatusCode: this.successfulResponses.multiStatus,
+    payload };
+  }
 
-  imUsed = (payload = null) => ({
-    statusCode: this.successfulResponses.imUsed,
-    payload
-  })
-}
+  alreadyReported(payload = null) {
+    return { statusCode: this.successfulResponses.alreadyReported,
+    payload };
+  }
+
+  imUsed(payload = null) {
+    return { statusCode: this.successfulResponses.imUsed,
+    payload }; 
+  }
+};

@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const { ErrorClient } = require('../utils');
 
 require('dotenv').config();
 
+console.log('Environment:', process.env);
 const errorHandle = require('../middlewares/errorHandle');
 
 const routes = require('../routes');
@@ -12,10 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/login', routes.loginRoute);
+app.use('/weather', routes.weatherRoute);
 
 app.all('*', (_req, _res) => {
-  const { ErrorClient } = require('../utils');
-  const errorClient = new ErrorClient;
+  const errorClient = new ErrorClient();
   throw errorClient.notFound('Endpoint not found');
 });
 

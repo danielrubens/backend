@@ -45,13 +45,13 @@ const validSignin = (req, res, next) => {
 const validToken = (req, _res, next) => {
   const { authorization } = req.headers;
 
-  const errorClient = new ErrorClient;
+  const errorClient = new ErrorClient();
 
   if (authorization === undefined) {
     throw errorClient('Token not found', 401);
   }
   const check = token.authenticate(authorization);
-  if (check.validated === false ) {
+  if (check.validated === false) {
     throw errorClient.unauthorized('Expired or invalid token');
   }
   req.user = { id: check.payload.id, name: check.payload.name };

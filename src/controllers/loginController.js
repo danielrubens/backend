@@ -3,13 +3,13 @@ const { loginService } = require('../services');
 
 const signIn = async (req, res) => { 
   const { email, password } = req.body;
-  const { statusCode, payload }  = await loginService.signIn({email, password});
+  const { statusCode, payload } = await loginService.signIn({ email, password });
   res.status(statusCode).json({ payload });
 };
 
 const signup = async (req, res) => {
   const { name, email, password } = req.body;
-  const {statusCode, payload} = await loginService.signup({name, email, password});
+  const { statusCode, payload } = await loginService.signup({ name, email, password });
   res.status(statusCode).json({ payload });
 };
 
