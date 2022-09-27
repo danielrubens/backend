@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    image: node:16.15.1
+    container_name: backend-weather
+    env_file:
+      - .env
+    networks:
+      - nt_weather
+    depends_on:
+      - db
+    working_dir: /app
+    restart: always
+    ports:
+      - ${PORT_BACK}:${PORT_BACK}
+    volumes:
+      - .:/app
+    command: bash -c "npm install && npm run seed && npm run dev"
+  db:
+    image: mysql:8.0
+    container_name: db-weather
+    networks:
+      - nt_weather
+    restart: always
+    ports:
+      - ${PORT_DB}:${PORT_DB}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+
+networks:
+  nt_weather:
+    name: nt_weather
+    driver: bridge 
+  
+
